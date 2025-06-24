@@ -1,0 +1,77 @@
+.header {
+    width: 100%;
+    height: 60px; /* Fixed height for the header */
+    background-color: #333;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000; /* Ensure the header is above other elements */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #fff;
+    text-decoration: none;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    margin: 0 50px 0 0;
+    padding: 0;
+}
+
+.nav-links li {
+    display: inline;
+}
+
+.nav-links a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: #00bcd4;
+}
+
+.logout-button {
+    background: none;
+    color: #fff;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+    padding:0;
+}
+
+.logout-button:hover {
+    background: none;
+    color: #00bcd4;
+    text-decoration: underline;
+}
+
+.cart-link {
+    position: relative;
+    display: inline-block;
+}
+
+.cart-badge {
+    position: absolute;
+    top: -8px;
+    right: -16px;
+    background: #ff4136;
+    color: #fff;
+    border-radius: 50%;
+    padding: 2px 8px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}

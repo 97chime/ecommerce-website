@@ -1,0 +1,85 @@
+.admin-dashboard-container {
+    display: flex;
+    margin-top: 60px; /* Add margin to account for the header height */
+}
+
+.admin-dashboard-content {
+    margin-left: 290px; /* Leave space for the sidebar */
+    padding: 20px;
+    width: 100%;
+}
+
+.admin-dashboard-content h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.seller-dashboard-container {
+    display: flex;
+    margin-top: 60px;
+}
+
+.seller-dashboard-content {
+    margin-left: 290px; /* Leave space for the sidebar */
+    padding: 20px;
+    width: 100%;
+}
+
+.seller-dashboard-content h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.dashboard-sections {
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping to the next row */
+    gap: 20px; /* Add spacing between sections */
+}
+
+.section {
+    flex: 1 1 calc(30% - 20px); /* Take up 1/3 of the row, minus the gap */
+    max-width: calc(30% - 20px); /* Ensure sections don't exceed 1/3 of the row */
+    padding: 20px;
+    margin: 0; /* Remove extra margins */
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    background-color: #f9f9f9;
+}
+
+.section h2 {
+    margin-bottom: 10px;
+}
+
+.section p {
+    margin-bottom: 20px;
+    color: #555;
+}
+
+.section button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.section button:hover {
+    background-color: #0056b3;
+}
+
+@media (max-width: 768px) {
+    .section {
+        flex: 1 1 calc(50% - 20px); /* 2 sections per row on smaller screens */
+        max-width: calc(50% - 20px);
+    }
+}
+
+@media (max-width: 480px) {
+    .section {
+        flex: 1 1 100%; /* 1 section per row on very small screens */
+        max-width: 100%;
+    }
+}
