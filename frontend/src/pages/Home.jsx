@@ -13,7 +13,7 @@ const Home = () => {
     }, []);
 
     return (
-        <div className="home">
+        <div className="home" test="">
             <h1>Welcome to Our E-Commerce Store</h1>
             <h2>Featured Products</h2>
             <div className="product-list">
