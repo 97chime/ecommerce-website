@@ -85,7 +85,7 @@ const Checkout = () => {
                 window.dispatchEvent(new Event('storage')); // Trigger cart update in CartContext
                 alert('Payment successful! Order placed.');
                 setShowPayment(false);
-                history.push('/');
+                history.push('/myorders/'+data.orderID); // Redirect to order details
             } else {
                 alert(data.message || 'Failed to place order.');
             }

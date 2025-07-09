@@ -24,24 +24,31 @@ const statusOptions = [
 ];
 
 const SellerManageOrders = () => {
-    const [orderItems, setOrderItems] = useState([]);
-    const [loading, setLoading] = useState(true);
+    // const [orderItems, setOrderItems] = useState([]);
+    // const [loading, setLoading] = useState(true);
     const [updatingOrder, setUpdatingOrder] = useState(null);
 
-    useEffect(() => {
-        fetch('http://localhost:5000/api/seller-orders', {
-            headers: {
-                'Authorization': `Bearer ${localStorage.getItem('token')}`,
-            },
-        })
-            .then(res => res.json())
-            .then(data => {
-                if (data.success) setOrderItems(data.orderItems);
-                setLoading(false);
-            });
-    }, [updatingOrder]); // refetch when updatingOrder changes
+    // useEffect(() => {
+    //     fetch('http://localhost:5000/api/seller-orders', {
+    //         headers: {
+    //             'Authorization': `Bearer ${localStorage.getItem('token')}`,
+    //         },
+    //     })
+    //         .then(res => res.json())
+    //         .then(data => {
+    //             if (data.success) setOrderItems(data.orderItems);
+    //             setLoading(false);
+    //         });
+    // }, [updatingOrder]); // refetch when updatingOrder changes
 
-    if (loading) return <div>Loading...</div>;
+    //if (loading) return <div>Loading...</div>;
+
+    const orderItems = [
+        { orderItemID: 1, orderID: 101, productName: 'Product A', imageURL: 'https://example.com/imageA.jpg', quantity: 2, price: 1500, orderDate: '2023-10-01T12:00:00Z', orderStatus: 1, customerName: 'John Doe' },
+        { orderItemID: 2, orderID: 101, productName: 'Product B', imageURL: 'https://example.com/imageB.jpg', quantity: 1, price: 2500, orderDate: '2023-10-01T12:00:00Z', orderStatus: 1, customerName: 'John Doe' },
+        { orderItemID: 3, orderID: 102, productName: 'Product C', imageURL: 'https://example.com/imageC.jpg', quantity: 3, price: 3000, orderDate: '2023-10-02T14:30:00Z', orderStatus: 2, customerName: 'Jane Smith' },
+        { orderItemID: 4, orderID: 103, productName: 'Product D', imageURL: 'https://example.com/imageD.jpg', quantity: 1, price: 2000, orderDate: '2023-10-03T09:15:00Z', orderStatus: 4, customerName: 'Alice Johnson' }
+    ];
 
     // Group orderItems by orderID
     const groupedOrders = orderItems.reduce((acc, item) => {
@@ -57,24 +64,24 @@ const SellerManageOrders = () => {
 
     // Handle status change
     const handleStatusChange = async (orderID, newStatus) => {
-        setUpdatingOrder(orderID);
-        try {
-            const res = await fetch(`http://localhost:5000/api/order/${orderID}/status`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${localStorage.getItem('token')}`,
-                },
-                body: JSON.stringify({ status: newStatus }),
-            });
-            const data = await res.json();
-            if (!data.success) {
-                alert(data.message || 'Failed to update status');
-            }
-        } catch (err) {
-            alert('Failed to update status');
-        }
-        setUpdatingOrder(null);
+        // setUpdatingOrder(orderID);
+        // try {
+        //     const res = await fetch(`http://localhost:5000/api/order/${orderID}/status`, {
+        //         method: 'PUT',
+        //         headers: {
+        //             'Content-Type': 'application/json',
+        //             'Authorization': `Bearer ${localStorage.getItem('token')}`,
+        //         },
+        //         body: JSON.stringify({ status: newStatus }),
+        //     });
+        //     const data = await res.json();
+        //     if (!data.success) {
+        //         alert(data.message || 'Failed to update status');
+        //     }
+        // } catch (err) {
+        //     alert('Failed to update status');
+        // }
+        // setUpdatingOrder(null);
     };
 
     return (

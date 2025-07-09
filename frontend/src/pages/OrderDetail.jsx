@@ -14,29 +14,47 @@ const statusMap = {
 };
 
 const OrderDetail = () => {
-    const { orderID } = useParams();
-    const [order, setOrder] = useState(null);
-    const [items, setItems] = useState([]);
-    const [loading, setLoading] = useState(true);
+    // const { orderID } = useParams();
+    // const [order, setOrder] = useState(null);
+    // const [items, setItems] = useState([]);
+    // const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-        fetch(`http://localhost:5000/api/my-orders/${orderID}`, {
-            headers: {
-                'Authorization': `Bearer ${localStorage.getItem('token')}`,
-            },
-        })
-            .then(res => res.json())
-            .then(data => {
-                if (data.success) {
-                    setOrder(data.order);
-                    setItems(data.items);
-                }
-                setLoading(false);
-            });
-    }, [orderID]);
+    // useEffect(() => {
+    //     fetch(`http://localhost:5000/api/my-orders/${orderID}`, {
+    //         headers: {
+    //             'Authorization': `Bearer ${localStorage.getItem('token')}`,
+    //         },
+    //     })
+    //         .then(res => res.json())
+    //         .then(data => {
+    //             if (data.success) {
+    //                 setOrder(data.order);
+    //                 setItems(data.items);
+    //             }
+    //             setLoading(false);
+    //         });
+    // }, [orderID]);
 
-    if (loading) return <div>Loading...</div>;
-    if (!order) return <div>Order not found.</div>;
+    // if (loading) return <div>Loading...</div>;
+    // if (!order) return <div>Order not found.</div>;
+
+    const orderID = '5'; // Hardcoded for demonstration
+    const order = { orderID: '5', createdAt: '2023-10-01T12:00:00Z', totalAmount: 5000, status: 1, recipientName: 'John Doe', addressLine1: '123 Main St', addressLine2: '', city: 'Kuala Lumpur', postalCode: '50000', country: 'Malaysia' }; // Hardcoded for demonstration
+    const items = [{
+        orderItemID: '1',
+        productID: '101',
+        name: 'Sample Product 1',
+        quantity: 2,
+        price: 2500, // Price in cents
+        imageURL: '', // Empty to test default image
+    }, {
+        orderItemID: '2',
+        productID: '102',
+        name: 'Sample Product 2',
+        quantity: 1,
+        price: 3000, // Price in cents
+        imageURL: '', // Empty to test default image
+    }];
 
     return (
         <div className="myorder-detail-container">

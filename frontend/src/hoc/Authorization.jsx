@@ -14,19 +14,19 @@ const Authorization = (WrappedComponent, allowedRoles) => {
                 return;
             }
 
-            try {
-                const payload = JSON.parse(atob(token.split('.')[1]));
-                const role = payload.role;
+            // try {
+            //     const payload = JSON.parse(atob(token.split('.')[1]));
+            //     const role = payload.role;
 
-                if (!allowedRoles.includes(role)) {
-                    alert('Access denied. You do not have permission to view this page.');
-                    history.goBack(); // Go back to the previous page
-                }
-            } catch (error) {
-                console.error('Invalid token:', error);
-                alert('Invalid session. Please log in again.');
-                history.push('/login');
-            }
+            //     if (!allowedRoles.includes(role)) {
+            //         alert('Access denied. You do not have permission to view this page.');
+            //         history.goBack(); // Go back to the previous page
+            //     }
+            // } catch (error) {
+            //     console.error('Invalid token:', error);
+            //     alert('Invalid session. Please log in again.');
+            //     history.push('/login');
+            // }
         }, [history]);
 
         return <WrappedComponent {...props} />;

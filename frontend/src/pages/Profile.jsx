@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 import '../styles/Profile.css';
 
 const Profile = () => {
-    const [user, setUser] = useState(null);
-    const [addresses, setAddresses] = useState([]);
-    const [loading, setLoading] = useState(true);
+    //const [user, setUser] = useState(null);
+    //const [addresses, setAddresses] = useState([]);
+    //const [loading, setLoading] = useState(true);
     const [editMode, setEditMode] = useState(false);
     const [editData, setEditData] = useState({ username: '', email: '' });
     const [showAddAddress, setShowAddAddress] = useState(false);
@@ -30,27 +30,44 @@ const Profile = () => {
     });
 
 
-    useEffect(() => {
-        fetch('http://localhost:5000/api/profile', {
-            headers: {
-                'Authorization': `Bearer ${localStorage.getItem('token')}`,
-            },
-        })
-            .then(res => res.json())
-            .then(data => {
-                if (data.success) {
-                    setUser(data.user);
-                    setAddresses(data.addresses);
-                } else {
-                    alert('Failed to fetch profile.');
-                }
-                setLoading(false);
-            })
-            .catch(() => {
-                alert('Failed to fetch profile.');
-                setLoading(false);
-            });
-    }, []);
+    // useEffect(() => {
+    //     fetch('http://localhost:5000/api/profile', {
+    //         headers: {
+    //             'Authorization': `Bearer ${localStorage.getItem('token')}`,
+    //         },
+    //     })
+    //         .then(res => res.json())
+    //         .then(data => {
+    //             if (data.success) {
+    //                 setUser(data.user);
+    //                 setAddresses(data.addresses);
+    //             } else {
+    //                 alert('Failed to fetch profile.');
+    //             }
+    //             setLoading(false);
+    //         })
+    //         .catch(() => {
+    //             alert('Failed to fetch profile.');
+    //             setLoading(false);
+    //         });
+    // }, []);
+
+    const user = {
+        username: 'john_doe',
+        email: '',
+        role: 3 // Assuming role 3 is customer
+    };
+    const addresses = [
+        {
+            addressID: '1',
+            recipientName: 'John Doe',
+            addressLine1: '123 Main St',
+            addressLine2: '',
+            city: 'Kuala Lumpur',
+            postalCode: '50000',
+            country: 'Malaysia',
+            isDefault: 1
+        }];
 
     const handleEditClick = () => {
         setEditData({ username: user.username, email: user.email });
@@ -63,24 +80,24 @@ const Profile = () => {
 
     const handleEditSubmit = (e) => {
         e.preventDefault();
-        fetch('http://localhost:5000/api/profile/edit', {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${localStorage.getItem('token')}`,
-            },
-            body: JSON.stringify(editData),
-        })
-            .then(res => res.json())
-            .then(data => {
-                if (data.success) {
-                    setUser(prev => ({ ...prev, ...editData }));
-                    setEditMode(false);
-                } else {
-                    alert('Failed to update profile.');
-                }
-            })
-            .catch(() => alert('Failed to update profile.'));
+        // fetch('http://localhost:5000/api/profile/edit', {
+        //     method: 'PUT',
+        //     headers: {
+        //         'Content-Type': 'application/json',
+        //         'Authorization': `Bearer ${localStorage.getItem('token')}`,
+        //     },
+        //     body: JSON.stringify(editData),
+        // })
+        //     .then(res => res.json())
+        //     .then(data => {
+        //         if (data.success) {
+        //             setUser(prev => ({ ...prev, ...editData }));
+        //             setEditMode(false);
+        //         } else {
+        //             alert('Failed to update profile.');
+        //         }
+        //     })
+        //     .catch(() => alert('Failed to update profile.'));
     };
 
     const handleAddAddressChange = (e) => {
@@ -89,36 +106,36 @@ const Profile = () => {
 
     const handleAddAddressSubmit = (e) => {
         e.preventDefault();
-        fetch('http://localhost:5000/api/address/add', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${localStorage.getItem('token')}`,
-            },
-            body: JSON.stringify(newAddress),
-        })
-            .then(res => res.json())
-            .then(data => {
-                if (data.success) {
-                    setAddresses(prev => [
-                        ...prev,
-                        { ...newAddress, addressID: data.addressID }
-                    ]);
-                    setShowAddAddress(false);
-                    setNewAddress({
-                        recipientName: '',
-                        addressLine1: '',
-                        addressLine2: '',
-                        city: '',
-                        postalCode: '',
-                        country: '',
-                        isDefault: 0
-                    });
-                } else {
-                    alert('Failed to add address.');
-                }
-            })
-            .catch(() => alert('Failed to add address.'));
+        // fetch('http://localhost:5000/api/address/add', {
+        //     method: 'POST',
+        //     headers: {
+        //         'Content-Type': 'application/json',
+        //         'Authorization': `Bearer ${localStorage.getItem('token')}`,
+        //     },
+        //     body: JSON.stringify(newAddress),
+        // })
+        //     .then(res => res.json())
+        //     .then(data => {
+        //         if (data.success) {
+        //             setAddresses(prev => [
+        //                 ...prev,
+        //                 { ...newAddress, addressID: data.addressID }
+        //             ]);
+        //             setShowAddAddress(false);
+        //             setNewAddress({
+        //                 recipientName: '',
+        //                 addressLine1: '',
+        //                 addressLine2: '',
+        //                 city: '',
+        //                 postalCode: '',
+        //                 country: '',
+        //                 isDefault: 0
+        //             });
+        //         } else {
+        //             alert('Failed to add address.');
+        //         }
+        //     })
+        //     .catch(() => alert('Failed to add address.'));
     };
 
     const handleEditAddressClick = (address) => {
@@ -144,33 +161,33 @@ const Profile = () => {
 
     const handleEditAddressSubmit = (e) => {
         e.preventDefault();
-        fetch(`http://localhost:5000/api/address/edit/${editAddressId}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${localStorage.getItem('token')}`,
-            },
-            body: JSON.stringify(editAddressData),
-        })
-            .then(res => res.json())
-            .then(data => {
-                if (data.success) {
-                    setAddresses(prev =>
-                        prev.map(addr =>
-                            addr.addressID === editAddressId
-                                ? { ...addr, ...editAddressData }
-                                : addr
-                        )
-                    );
-                    setEditAddressId(null);
-                } else {
-                    alert('Failed to update address.');
-                }
-            })
-            .catch(() => alert('Failed to update address.'));
+        // fetch(`http://localhost:5000/api/address/edit/${editAddressId}`, {
+        //     method: 'PUT',
+        //     headers: {
+        //         'Content-Type': 'application/json',
+        //         'Authorization': `Bearer ${localStorage.getItem('token')}`,
+        //     },
+        //     body: JSON.stringify(editAddressData),
+        // })
+        //     .then(res => res.json())
+        //     .then(data => {
+        //         if (data.success) {
+        //             setAddresses(prev =>
+        //                 prev.map(addr =>
+        //                     addr.addressID === editAddressId
+        //                         ? { ...addr, ...editAddressData }
+        //                         : addr
+        //                 )
+        //             );
+        //             setEditAddressId(null);
+        //         } else {
+        //             alert('Failed to update address.');
+        //         }
+        //     })
+        //     .catch(() => alert('Failed to update address.'));
     };
 
-    if (loading) return <div className="profile-container">Loading...</div>;
+    //if (loading) return <div className="profile-container">Loading...</div>;
 
     return (
         <div className="profile-container">

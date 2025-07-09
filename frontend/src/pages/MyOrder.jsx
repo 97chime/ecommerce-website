@@ -13,23 +13,29 @@ const statusMap = {
 };
 
 const MyOrder = () => {
-    const [orders, setOrders] = useState([]);
-    const [loading, setLoading] = useState(true);
+    //const [orders, setOrders] = useState([]);
+    //const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-        fetch('http://localhost:5000/api/my-orders', {
-            headers: {
-                'Authorization': `Bearer ${localStorage.getItem('token')}`,
-            },
-        })
-            .then(res => res.json())
-            .then(data => {
-                if (data.success) setOrders(data.orders);
-                setLoading(false);
-            });
-    }, []);
+    // useEffect(() => {
+    //     fetch('http://localhost:5000/api/my-orders', {
+    //         headers: {
+    //             'Authorization': `Bearer ${localStorage.getItem('token')}`,
+    //         },
+    //     })
+    //         .then(res => res.json())
+    //         .then(data => {
+    //             if (data.success) setOrders(data.orders);
+    //             setLoading(false);
+    //         });
+    // }, []);
 
-    if (loading) return <div>Loading...</div>;
+    //if (loading) return <div>Loading...</div>;
+
+    const orders = [
+        { orderID: '5', createdAt: '2023-10-01T12:00:00Z', totalAmount: 5000, status: 1 },
+        { orderID: '7', createdAt: '2023-10-02T14:30:00Z', totalAmount: 7500, status: 2 },
+        { orderID: '9', createdAt: '2023-10-03T16:45:00Z', totalAmount: 3000, status: 3 },
+    ];
 
     return (
         <div className="myorder-container">

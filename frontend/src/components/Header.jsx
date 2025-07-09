@@ -10,20 +10,20 @@ const Header = () => {
     const { cart } = useCart();
 
     const handleLogout = () => {
-        fetch('http://localhost:5000/api/logout', { method: 'POST' })
-            .then((response) => response.json())
-            .then((data) => {
-                if (data.success) {
+        // fetch('http://localhost:5000/api/logout', { method: 'POST' })
+        //     .then((response) => response.json())
+        //     .then((data) => {
+        //         if (data.success) {
                     localStorage.removeItem('token');
                     localStorage.removeItem('id');
                     localStorage.removeItem('role');
                     setToken(null);
                     history.push('/login');
-                } else {
-                    alert('Logout failed. Please try again.');
-                }
-            })
-            .catch((error) => console.error('Error during logout:', error));
+            //     } else {
+            //         alert('Logout failed. Please try again.');
+            //     }
+            // })
+            // .catch((error) => console.error('Error during logout:', error));
     };
 
     useEffect(() => {

@@ -15,45 +15,78 @@ const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
+    // const handleSubmit = (e) => {
+    //     e.preventDefault();
+    //     // Example: Send login data to the backend
+    //     fetch('http://localhost:5000/api/login', {
+    //         method: 'POST',
+    //         headers: { 'Content-Type': 'application/json' },
+    //         body: JSON.stringify({ email, password }),
+    //     })
+    //         .then((response) => response.json())
+    //         .then((data) => {
+    //             if (data.success) {
+    //                 //alert(data.token);
+
+    //                 const payload = JSON.parse(atob(data.token.split('.')[1]));
+    //                 const id = payload.id;
+    //                 const role = payload.role;
+
+    //                 //alert(JSON.stringify(payload)); 
+    //                 //alert(`Login successful! User ID: ${id}, Role: ${role}`);
+
+    //                 // Store the token & role in localStorage or state
+    //                 localStorage.setItem('token', data.token);
+    //                 localStorage.setItem('id', id);
+    //                 localStorage.setItem('role', role);
+                    
+    //                 if (role === 1) { // admin
+    //                     window.location.href = '/admin-dashboard';
+    //                 } else if (role === 2) { // seller
+    //                     // Redirect to seller dashboard
+    //                     window.location.href = '/seller-dashboard';
+    //                 } else if (role === 3) { // customer
+    //                     // Redirect to customer homepage
+    //                     window.location.href = '/';
+    //                 }
+    //             } else {
+    //                 alert('Login failed. Please check your credentials.');
+    //             }
+    //         })
+    //         .catch((error) => console.error('Error during login:', error));
+    // };
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Example: Send login data to the backend
-        fetch('http://localhost:5000/api/login', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email, password }),
-        })
-            .then((response) => response.json())
-            .then((data) => {
-                if (data.success) {
-                    //alert(data.token);
 
-                    const payload = JSON.parse(atob(data.token.split('.')[1]));
-                    const id = payload.id;
-                    const role = payload.role;
+        var id = "-1";
+        var role = -1;
 
-                    //alert(JSON.stringify(payload)); 
-                    //alert(`Login successful! User ID: ${id}, Role: ${role}`);
+        if (email === "customer@test.com"){
+            id = "3";
+            role = 3; // customer
+        } else if (email === "seller@test.com") {
+            id = "2";
+            role = 2; // seller
+        } else if (email === "admin@test.com") {
+            id = "1";
+            role = 1; // admin
+        }
 
-                    // Store the token & role in localStorage or state
-                    localStorage.setItem('token', data.token);
-                    localStorage.setItem('id', id);
-                    localStorage.setItem('role', role);
-                    
-                    if (role === 1) { // admin
-                        window.location.href = '/admin-dashboard';
-                    } else if (role === 2) { // seller
-                        // Redirect to seller dashboard
-                        window.location.href = '/seller-dashboard';
-                    } else if (role === 3) { // customer
-                        // Redirect to customer homepage
-                        window.location.href = '/';
-                    }
-                } else {
-                    alert('Login failed. Please check your credentials.');
-                }
-            })
-            .catch((error) => console.error('Error during login:', error));
+        // Store the token & role in localStorage or state
+        localStorage.setItem('token', "asdasd");
+        localStorage.setItem('id', id);
+        localStorage.setItem('role', role);
+        
+        if (role === 1) { // admin
+            window.location.href = '/admin-dashboard';
+        } else if (role === 2) { // seller
+            // Redirect to seller dashboard
+            window.location.href = '/seller-dashboard';
+        } else if (role === 3) { // customer
+            // Redirect to customer homepage
+            window.location.href = '/';
+        }
     };
 
     return (

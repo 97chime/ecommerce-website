@@ -19,31 +19,31 @@ const AddEditProduct = () => {
 
     const [isEditing, setIsEditing] = useState(false);
 
-    useEffect(() => {
-        if (id) {
-            // Fetch product details if editing
-            fetch(`http://localhost:5000/api/seller-products/${id}`, {
-                method: 'GET',
-                headers: {
-                    'Authorization': `Bearer ${localStorage.getItem('token')}`,
-                },
-            })
-                .then((response) => response.json())
-                .then((data) => {
-                    if (data) {
-                        setProduct(data.product);
-                        setIsEditing(true);
+    // useEffect(() => {
+    //     if (id) {
+    //         // Fetch product details if editing
+    //         fetch(`http://localhost:5000/api/seller-products/${id}`, {
+    //             method: 'GET',
+    //             headers: {
+    //                 'Authorization': `Bearer ${localStorage.getItem('token')}`,
+    //             },
+    //         })
+    //             .then((response) => response.json())
+    //             .then((data) => {
+    //                 if (data) {
+    //                     setProduct(data.product);
+    //                     setIsEditing(true);
 
-                        //alert('createdAt: '+ product.createdAt);
-                        //alert('createdAt: ' + new Date(data.createdAt).toLocaleString());
-                    } else {
-                        alert('Product not found');
-                        history.push('/seller-products');
-                    }
-                })
-                .catch((error) => console.error('Error fetching product:', error));
-        }
-    }, [id, history]);
+    //                     //alert('createdAt: '+ product.createdAt);
+    //                     //alert('createdAt: ' + new Date(data.createdAt).toLocaleString());
+    //                 } else {
+    //                     alert('Product not found');
+    //                     history.push('/seller-products');
+    //                 }
+    //             })
+    //             .catch((error) => console.error('Error fetching product:', error));
+    //     }
+    // }, [id, history]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -59,30 +59,30 @@ const AddEditProduct = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        const url = isEditing
-            ? `http://localhost:5000/api/seller-products/edit/${id}`
-            : 'http://localhost:5000/api/seller-products/add';
+        // const url = isEditing
+        //     ? `http://localhost:5000/api/seller-products/edit/${id}`
+        //     : 'http://localhost:5000/api/seller-products/add';
 
-        const method = isEditing ? 'PUT' : 'POST';
+        // const method = isEditing ? 'PUT' : 'POST';
 
-        fetch(url, {
-            method: method,
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${localStorage.getItem('token')}`,
-            },
-            body: JSON.stringify(product),
-        })
-            .then((response) => response.json())
-            .then((data) => {
-                if (data.success) {
-                    alert(isEditing ? 'Product updated successfully' : 'Product added successfully');
-                    history.push('/seller-products');
-                } else {
-                    alert(data.message || 'Failed to save product');
-                }
-            })
-            .catch((error) => console.error('Error saving product:', error));
+        // fetch(url, {
+        //     method: method,
+        //     headers: {
+        //         'Content-Type': 'application/json',
+        //         'Authorization': `Bearer ${localStorage.getItem('token')}`,
+        //     },
+        //     body: JSON.stringify(product),
+        // })
+        //     .then((response) => response.json())
+        //     .then((data) => {
+        //         if (data.success) {
+        //             alert(isEditing ? 'Product updated successfully' : 'Product added successfully');
+        //             history.push('/seller-products');
+        //         } else {
+        //             alert(data.message || 'Failed to save product');
+        //         }
+        //     })
+        //     .catch((error) => console.error('Error saving product:', error));
     };
 
     return (

@@ -6,22 +6,30 @@ import defaultImage from '../assets/default.jpg';
 
 const ProductDetail = () => {
     const { id } = useParams(); // Get the product ID from the URL
-    const [product, setProduct] = useState(null);
+    //const [product, setProduct] = useState(null);
     const { addToCart } = useCart();
 
-    useEffect(() => {
-        // Fetch product details from the backend
-        fetch(`http://localhost:5000/api/product/${id}`)
-            .then((response) => response.json())
-            .then((data) => {
-                if (data.success) {
-                    setProduct(data.product);
-                } else {
-                    alert('Failed to fetch product details.');
-                }
-            })
-            .catch((error) => console.error('Error fetching product details:', error));
-    }, [id]);
+    // useEffect(() => {
+    //     // Fetch product details from the backend
+    //     fetch(`http://localhost:5000/api/product/${id}`)
+    //         .then((response) => response.json())
+    //         .then((data) => {
+    //             if (data.success) {
+    //                 setProduct(data.product);
+    //             } else {
+    //                 alert('Failed to fetch product details.');
+    //             }
+    //         })
+    //         .catch((error) => console.error('Error fetching product details:', error));
+    // }, [id]);
+
+    const product = {
+        productID: id,
+        name: 'Sample Product',
+        price: 2999, // Price in cents
+        imageURL: '', // Empty to test default image
+        description: 'This is a sample product description.'
+    };
 
     if (!product) {
         return <div>Loading...</div>;

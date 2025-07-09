@@ -5,44 +5,61 @@ import Sidebar from '../../components/Sidebar';
 import '../../styles/SellerProducts.css';
 
 const SellerProducts = () => {
-    const [products, setProducts] = useState([]);
-    const [loading, setLoading] = useState(true);
+    // const [products, setProducts] = useState([]);
+    // const [loading, setLoading] = useState(true);
     const history = useHistory();
 
-    useEffect(() => {
-        // Fetch seller's products from the backend
-        fetch('http://localhost:5000/api/seller-products', {
-            method: 'GET',
-            headers: {
-                'Authorization': `Bearer ${localStorage.getItem('token')}`, // Include the token
-            },
-        })
-            .then((response) => response.json())
-            .then((data) => {
-                if (data.success) {
-                    setProducts(data.products);
-                } else {
-                    alert('Failed to fetch products.');
-                }
-                setLoading(false);
-            })
-            .catch((error) => {
-                console.error('Error fetching products:', error);
-                setLoading(false);
-            });
-    }, []);
+    // useEffect(() => {
+    //     // Fetch seller's products from the backend
+    //     fetch('http://localhost:5000/api/seller-products', {
+    //         method: 'GET',
+    //         headers: {
+    //             'Authorization': `Bearer ${localStorage.getItem('token')}`, // Include the token
+    //         },
+    //     })
+    //         .then((response) => response.json())
+    //         .then((data) => {
+    //             if (data.success) {
+    //                 setProducts(data.products);
+    //             } else {
+    //                 alert('Failed to fetch products.');
+    //             }
+    //             setLoading(false);
+    //         })
+    //         .catch((error) => {
+    //             console.error('Error fetching products:', error);
+    //             setLoading(false);
+    //         });
+    // }, []);
 
-    if (loading) {
-        return (
-            <div className="seller-products-container">
-                <Sidebar />
-                <div className="seller-products-content">
-                    <h1>Product Overview</h1>
-                    <div className="loading-message">Loading...</div>
-                </div>
-            </div>
-        );
-    }
+    // if (loading) {
+    //     return (
+    //         <div className="seller-products-container">
+    //             <Sidebar />
+    //             <div className="seller-products-content">
+    //                 <h1>Product Overview</h1>
+    //                 <div className="loading-message">Loading...</div>
+    //             </div>
+    //         </div>
+    //     );
+    // }
+
+    const products = [
+        {
+            productID: 1,
+            name: 'Product A',
+            price: 1500, // in cents
+            stock: 10,
+            isApproved: true,
+        },
+        {
+            productID: 2,
+            name: 'Product B',
+            price: 2500, // in cents
+            stock: 5,
+            isApproved: false,
+        },
+    ];
 
     return (
         <div className="seller-products-container">
