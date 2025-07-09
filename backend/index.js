@@ -4,6 +4,7 @@ const cors = require('cors');
 const mysql = require('mysql2');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const dotenv = require('dotenv');
 
 // vvv for testing purposes only vvv
 const SECRET_KEY = '9fc25d377fc99eaa4f6ed3b9c8b0e75e14ad0fd6b3ee3de10f4710403096e82c067d364f8b38e8c97114e70e9048d20ecd248e5845bcae7b78a6c6b1f805ba1f';
@@ -17,6 +18,9 @@ app.use(cors({
     origin: 'http://localhost:3000', // Allow requests from this origin
     credentials: true, // Allow cookies to be sent with requests
 }));
+
+// Load environment variables from .env file
+dotenv.config();
 
 // Middleware to Verify JWT
 const authenticateToken = (req, res, next) => {
@@ -35,10 +39,10 @@ const authenticateToken = (req, res, next) => {
 };
 
 const db = mysql.createConnection({
-    host: 'localhost', 
-    user: 'root',
-    password: 'password', 
-    database: 'ecommercedb'
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME
 });
 
 // Connect to the database
