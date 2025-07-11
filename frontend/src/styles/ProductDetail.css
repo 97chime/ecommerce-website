@@ -14,7 +14,7 @@
 
 .product-image-container {
     flex: 1; /* Allow the image container to take up 1 part of the space */
-    max-width: 30%; /* Limit the width to 30% */
+    max-width: 40%; /* Limit the width to 40% */
     margin-right: 20px; /* Add spacing between the image and info */
 }
 
@@ -28,7 +28,7 @@
 
 .product-info-container {
     flex: 1; /* Allow the info container to take up 1 part of the space */
-    max-width: 70%; /* Limit the width to 70% */
+    max-width: 60%; /* Limit the width to 60% */
 }
 
 .product-info-container h1 {

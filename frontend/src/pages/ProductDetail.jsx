@@ -27,7 +27,7 @@ const ProductDetail = () => {
         productID: id,
         name: 'Sample Product',
         price: 2999, // Price in cents
-        imageURL: '', // Empty to test default image
+        imageURL: 'https://live.staticflickr.com/65535/54647467055_93e6735f48_b.jpg', 
         description: 'This is a sample product description.'
     };
 

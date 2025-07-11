@@ -17,21 +17,21 @@ const ProductList = () => {
             productID: 1,
             name: 'Product 1',
             price: 2999,
-            imageURL: '',
+            imageURL: 'https://live.staticflickr.com/65535/54647467055_93e6735f48_b.jpg',
             description: 'This is a great product.'
         },
         {
             productID: 2,
             name: 'Product 2',
             price: 3999,
-            imageURL: '',
+            imageURL: 'https://live.staticflickr.com/65535/54646303777_ca7beb095c_b.jpg',
             description: 'This is another great product.'
         },
         {            
             productID: 3,
             name: 'Product 3',
             price: 4999,
-            imageURL: '',
+            imageURL: 'https://live.staticflickr.com/65535/54647380919_34456f8a9f_b.jpg',
             description: 'This is yet another great product.'
         }
     ];

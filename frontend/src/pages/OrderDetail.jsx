@@ -42,18 +42,18 @@ const OrderDetail = () => {
     const order = { orderID: '5', createdAt: '2023-10-01T12:00:00Z', totalAmount: 5000, status: 1, recipientName: 'John Doe', addressLine1: '123 Main St', addressLine2: '', city: 'Kuala Lumpur', postalCode: '50000', country: 'Malaysia' }; // Hardcoded for demonstration
     const items = [{
         orderItemID: '1',
-        productID: '101',
+        productID: '1',
         name: 'Sample Product 1',
         quantity: 2,
         price: 2500, // Price in cents
-        imageURL: '', // Empty to test default image
+        imageURL: 'https://live.staticflickr.com/65535/54647467055_93e6735f48_b.jpg', 
     }, {
         orderItemID: '2',
-        productID: '102',
+        productID: '2',
         name: 'Sample Product 2',
         quantity: 1,
         price: 3000, // Price in cents
-        imageURL: '', // Empty to test default image
+        imageURL: 'https://live.staticflickr.com/65535/54646303777_ca7beb095c_b.jpg',
     }];
 
     return (
