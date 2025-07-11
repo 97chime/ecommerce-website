@@ -6,9 +6,9 @@ import '../styles/Checkout.css';
 const Checkout = () => {
     const { cart } = useCart();
     const history = useHistory();
-    const [addresses, setAddresses] = useState([]);
-    const [selectedAddressId, setSelectedAddressId] = useState(null);
-    const [loading, setLoading] = useState(true);
+    // const [addresses, setAddresses] = useState([]);
+    const [selectedAddressId, setSelectedAddressId] = useState(1);
+    // const [loading, setLoading] = useState(true);
     const [showPayment, setShowPayment] = useState(false);
     const [paymentData, setPaymentData] = useState({
         cardNumber: '5000500050005000',
@@ -19,24 +19,47 @@ const Checkout = () => {
 
     const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
 
-    useEffect(() => {
-        fetch('http://localhost:5000/api/profile', {
-            headers: {
-                'Authorization': `Bearer ${localStorage.getItem('token')}`,
-            },
-        })
-            .then(res => res.json())
-            .then(data => {
-                if (data.success) {
-                    setAddresses(data.addresses);
-                    if (data.addresses.length > 0) {
-                        const defaultAddr = data.addresses.find(a => a.isDefault === 1);
-                        setSelectedAddressId(defaultAddr ? defaultAddr.addressID : data.addresses[0].addressID);
-                    }
-                }
-                setLoading(false);
-            });
-    }, []);
+    // useEffect(() => {
+    //     fetch('http://localhost:5000/api/profile', {
+    //         headers: {
+    //             'Authorization': `Bearer ${localStorage.getItem('token')}`,
+    //         },
+    //     })
+    //         .then(res => res.json())
+    //         .then(data => {
+    //             if (data.success) {
+    //                 setAddresses(data.addresses);
+    //                 if (data.addresses.length > 0) {
+    //                     const defaultAddr = data.addresses.find(a => a.isDefault === 1);
+    //                     setSelectedAddressId(defaultAddr ? defaultAddr.addressID : data.addresses[0].addressID);
+    //                 }
+    //             }
+    //             setLoading(false);
+    //         });
+    // }, []);
+
+    const addresses = [
+        {
+            addressID: 1,
+            recipientName: 'John Doe',
+            addressLine1: '123 Main St',
+            addressLine2: 'Apt 4B',
+            city: 'Kuala Lumpur',
+            postalCode: '50000',
+            country: 'Malaysia',
+            isDefault: 1
+        },
+        {
+            addressID: 2,
+            recipientName: 'Jane Smith',
+            addressLine1: '456 Elm St',
+            addressLine2: '',
+            city: 'Petaling Jaya',
+            postalCode: '46000',
+            country: 'Malaysia',
+            isDefault: 0
+        }
+    ];
 
     const handleAddressChange = (e) => {
         setSelectedAddressId(Number(e.target.value));
@@ -49,53 +72,53 @@ const Checkout = () => {
     const handlePaymentSubmit = async (e) => {
         e.preventDefault();
         // Simple validation
-        if (
-            !/^\d{16}$/.test(paymentData.cardNumber) ||
-            !/^\d{2}\/\d{2}$/.test(paymentData.expiry) ||
-            !/^\d{3,4}$/.test(paymentData.cvv)
-        ) {
-            alert('Please enter valid payment details.');
-            return;
-        }
-        setPaymentLoading(true);
+        // if (
+        //     !/^\d{16}$/.test(paymentData.cardNumber) ||
+        //     !/^\d{2}\/\d{2}$/.test(paymentData.expiry) ||
+        //     !/^\d{3,4}$/.test(paymentData.cvv)
+        // ) {
+        //     alert('Please enter valid payment details.');
+        //     return;
+        // }
+        // setPaymentLoading(true);
 
-        try {
-            const response = await fetch('http://localhost:5000/api/place-order', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${localStorage.getItem('token')}`,
-                },
-                body: JSON.stringify({
-                    addressID: selectedAddressId,
-                    cart: cart.map(item => ({
-                        productID: item.productID,
-                        quantity: item.quantity,
-                        price: item.price
-                    })),
-                    total,
-                    payment: paymentData
-                }),
-            });
-            const data = await response.json();
-            setPaymentLoading(false);
-            if (data.success) {
-                // Clear cart after successful order
-                localStorage.removeItem('cart');
-                window.dispatchEvent(new Event('storage')); // Trigger cart update in CartContext
-                alert('Payment successful! Order placed.');
-                setShowPayment(false);
-                history.push('/myorders/'+data.orderID); // Redirect to order details
-            } else {
-                alert(data.message || 'Failed to place order.');
-            }
-        } catch (err) {
-            setPaymentLoading(false);
-            alert('Failed to place order. Please try again.');
-        }
+        // try {
+        //     const response = await fetch('http://localhost:5000/api/place-order', {
+        //         method: 'POST',
+        //         headers: {
+        //             'Content-Type': 'application/json',
+        //             'Authorization': `Bearer ${localStorage.getItem('token')}`,
+        //         },
+        //         body: JSON.stringify({
+        //             addressID: selectedAddressId,
+        //             cart: cart.map(item => ({
+        //                 productID: item.productID,
+        //                 quantity: item.quantity,
+        //                 price: item.price
+        //             })),
+        //             total,
+        //             payment: paymentData
+        //         }),
+        //     });
+        //     const data = await response.json();
+        //     setPaymentLoading(false);
+        //     if (data.success) {
+        //         // Clear cart after successful order
+        //         localStorage.removeItem('cart');
+        //         window.dispatchEvent(new Event('storage')); // Trigger cart update in CartContext
+        //         alert('Payment successful! Order placed.');
+        //         setShowPayment(false);
+        //         history.push('/myorders/'+data.orderID); // Redirect to order details
+        //     } else {
+        //         alert(data.message || 'Failed to place order.');
+        //     }
+        // } catch (err) {
+        //     setPaymentLoading(false);
+        //     alert('Failed to place order. Please try again.');
+        // }
     };
 
-    if (loading) return <div className="checkout-container">Loading...</div>;
+    //if (loading) return <div className="checkout-container">Loading...</div>;
 
     return (
         <div className="checkout-container flex-checkout">
